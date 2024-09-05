@@ -14,12 +14,16 @@ export const  coursesApi = createApi({
 
         getCourseById: builder.query<TCourse, { id: number }>({
             query: ({id}) => `/courses/getbyid?id=${id}`
+        }),
+        insertNew: builder.mutation<TCourse, Partial<TCourse>>({
+            query: (newCourse) => ({url:`/courses/addcourserecord`, method:'POST', body: newCourse})
         })
     }),
 });
 
 export const {
     useGetAllCoursesQuery,
-    useGetCourseByIdQuery
+    useGetCourseByIdQuery,
+    useInsertNewMutation,
 } = coursesApi
 

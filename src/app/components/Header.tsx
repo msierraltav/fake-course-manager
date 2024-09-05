@@ -7,8 +7,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SearchIcon from '@mui/icons-material/Search';
+import Link from "@mui/material/Link";
+import NextLink from "next/link";
 import { useAppDispatch, useAppSelector } from '@/redux/useReduxHooks';
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { setSearchBar, setSubTitle } from "@/redux/features/headerSlice";
@@ -87,6 +89,7 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+        <Link href="/" color="secondary" component={NextLink}>
           <IconButton
             size="large"
             edge="start"
@@ -94,8 +97,9 @@ export default function Header() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <MenuBookIcon />
           </IconButton>
+          </Link>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {subTitle? subTitle : "Course Manager"}
           </Typography>

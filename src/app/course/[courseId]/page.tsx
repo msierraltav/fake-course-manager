@@ -29,7 +29,6 @@ const CourseDetails = ({ params }: Props) => {
     dispatch(setSubTitle(`Course : [ ${course.subject} ] ${course.courseNumber}`));
   }
 
-  console.log(course);
   return <div className="flex flex-col justify-center items-center">
     {isSuccess && (
         <Course course={course} isCourseDetail={true}/>
