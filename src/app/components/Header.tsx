@@ -9,6 +9,9 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { useAppDispatch, useAppSelector } from '@/redux/useReduxHooks';
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { setSearchBar, setSubTitle } from "@/redux/features/headerSlice";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,6 +56,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+  const dispatch = useAppDispatch();
+  const {replace} = useRouter();
+
+  const subTitle = useAppSelector((state) => state.headerReducer.subTitle);
+
+  // preserve the search result
+ if(searchParams.get("q")){
+  const params = new URLSearchParams(searchParams);
+  dispatch(setSearchBar(params.get("q")));
+ }
+
+ // Update the subtitle if the path is /course/id
+ if(!pathName.includes("course")){
+      dispatch(setSubTitle(""));
+    }
+
+  const handleSearchChange = (term: string) => {
+    const params = new URLSearchParams(searchParams);
+    term? params.set("q", term) : params.delete("query");
+    replace(`${pathName}?${params.toString()}`);
+    dispatch(setSearchBar(term));
+  };
+
+  
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -67,7 +97,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Course Manager
+            {subTitle? subTitle : "Course Manager"}
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -76,6 +106,7 @@ export default function Header() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => {handleSearchChange(e.target.value)}}
             />
           </Search>
         </Toolbar>

@@ -3,6 +3,8 @@ import React from "react";
 import Course from "@/app/components/course/Course";
 import { useGetCourseByIdQuery } from "@/redux/services/coursesApi";
 import { TCourse } from "@/lib/types";
+import { useAppDispatch } from '@/redux/useReduxHooks';
+import { setSearchBar, setSubTitle } from "@/redux/features/headerSlice";
 
 type Props = {
   params: {
@@ -13,6 +15,8 @@ type Props = {
 let course : TCourse;
 
 const CourseDetails = ({ params }: Props) => {
+
+  const dispatch = useAppDispatch();
   const {
     data,
     error,
@@ -22,6 +26,7 @@ const CourseDetails = ({ params }: Props) => {
 
   if(isSuccess){
     course = data;
+    dispatch(setSubTitle(`Course : [ ${course.subject} ] ${course.courseNumber}`));
   }
 
   console.log(course);
