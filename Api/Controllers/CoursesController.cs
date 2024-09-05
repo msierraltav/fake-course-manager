@@ -21,12 +21,26 @@ public class CoursesController : ControllerBase
         _dbContext = dbContext;
     }
 
-    //http://localhost:5020/api/Courses/GetAll
+    //http://localhost:5020/api/Courses/GetAll?q=sometext
     [HttpGet]
     [Route("[action]")]
     public IActionResult GetAll()
     {
-        var allCourses = _dbContext.Courses.ToList();
+        var allCourses = new List<Course>();
+
+        var query = Request.Query["q"].ToString().Trim().ToLower();
+
+        if (!string.IsNullOrEmpty(query))
+        {
+            allCourses = _dbContext.Courses
+                .Where(c => c.Description.Contains(query) ||
+                            c.Subject.Contains(query))
+                .ToList();
+        }
+        else
+        {
+            allCourses = _dbContext.Courses.ToList();
+        }
         return Ok(allCourses);
     }
 

@@ -9,8 +9,8 @@ export const  coursesApi = createApi({
     }),
     endpoints: (builder) => ({
 
-        getAllCourses: builder.query<TCourse[], void>({
-            query: () => `/Courses/GetAll`
+        getAllCourses: builder.query<TCourse[], {q:string}>({
+            query: ({q}) => `/Courses/GetAll${q.length > 3 ? `?q=${q}` : ''}`
         }),
 
         getCourseById: builder.query<TCourse, { id: UUID }>({

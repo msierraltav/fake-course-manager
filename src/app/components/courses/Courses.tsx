@@ -13,10 +13,11 @@ import { clearLastAdded, clearRemoved } from "@/redux/features/headerSlice";
 type Props = {};
 
 const Courses = (props: Props) => {
-  const { data, error, isSuccess, isLoading } = useGetAllCoursesQuery();
   const lastAdded = useAppSelector((state) => state.headerReducer.lastAdded);
   const lastRemoved = useAppSelector((state) => state.headerReducer.lastRemoved);
+  const searchQuery = useAppSelector((state) => state.headerReducer.searchBar);
   const dispatch = useAppDispatch();
+  const { data, error, isSuccess, isLoading } = useGetAllCoursesQuery({q: searchQuery});
   const [courseList, setCourseList] = useState<TCourse[]>(data || []);
 
   if (error) {
