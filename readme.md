@@ -3,12 +3,12 @@
 A fake application to apply to a software developer position, the assigment timeframe is 2 days. 
 
 ## Stack
+ The application was built using the following thecnologies: 
+    Api is built in .net
+    App is built using React/Nextjs
+    DB using Postgres
 
-Api is built in .net
-App is built using Nextjs
-DB using Postgres
-
-Other technologies used : Redux, MUI, sass, eslint, prettier. entity framework 
+also other complementary technologies used : Redux, MUI, sass, eslint, prettier. entity framework, postgres.
 
 ## requirements
 
@@ -16,11 +16,11 @@ Other technologies used : Redux, MUI, sass, eslint, prettier. entity framework
 -npm / pnpm
 -dotnet > 8
 -docker desktop / docker cli
--dotnety entitiy framework
+-dotnet entitiy framework
 
-## Running on local 
+## TL:DR Running on local 
 
-    First Start the db container 
+    First start the postgres db container 
 
     ```bash
     docker pull postgres
@@ -35,10 +35,11 @@ Other technologies used : Redux, MUI, sass, eslint, prettier. entity framework
     ```
 
     then start the API ruuning
+    also API will create two example registers if the DB is empty.
+
     ```bash
     dotnet run
     ```
-    also the last command will create two example register
 
     finally run the frontend
 
@@ -46,7 +47,7 @@ Other technologies used : Redux, MUI, sass, eslint, prettier. entity framework
     pnpm install
     pnpm run dev
     ```
-
+    the app is served at [http://localhost:3000](http://localhost:3000)
 
 ## development instructions
 
@@ -133,26 +134,27 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Assestment instructions
 Develop simple Web application, in any language of your choosing, which manages "Course" records:
 - [x]The application should manage the following information about a Course: id, subject, courseNumber, description. All fields other than id are strings
-- []There should be a simple UI/UX to add/remove courses, search courses, and show list of current courses. This does not have to be fancy as we are not looking for a UI Designer.
-- The application should store data in an external database or another data storage system.
+- [x]There should be a simple UI/UX to add/remove courses, search courses, and show list of current courses. This does not have to be fancy as we are not looking for a UI Designer.
+- [x]The application should store data in an external database or another data storage system.
 
 Features:
 - The application should allow user to search for a course by description, with partial matches like "Bio" would find "Introduction to Biology"
 - The application should support deleting a Course
-- [x]The application should support inserting a new Course
-- courseNumber must be formatted as a three-digit, zero-padded integer like "033". Adding records which are not three-digit numbers results in an validation message to the user
-- The application should prevent inserting duplicate courses, where subject and number must be unique
+- [x] The application should support inserting a new Course
+- [x] courseNumber must be formatted as a three-digit, zero-padded integer like "033". 
+- [x] Adding records which are not three-digit numbers results in an validation message to the user
+- [x] The application should prevent inserting duplicate courses, where subject and number must be unique
 
 Addtional Information:
-- The application must be started with minimal setup using readily available libraries (e.g. `npm start` for Node.js) and sufficiently described in a README.md
-- The application must be complete and sent as a zipped package over email or a github link
-- The application will only be tested in Google Chrome
+- [x] The application must be started with minimal setup using readily available libraries (e.g. `npm start` for Node.js) and sufficiently described in a README.md
+- [x] The application must be complete and sent as a zipped package over email or a github link
+- [x] The application will only be tested in Google Chrome
 
 Example Course records:
 1, "BIO", 101, "Introduction to Biology"
 2, "MAT", 045, "Business Statistics"
 
 Suggestions:
-- Use an API to manage data and connect to the API from a front-end, Javascript application
+- [x] Use an API to manage data and connect to the API from a front-end, Javascript application
 - Show that tests have been used to validate behavior
 - Runnable via Docker or Kubernetes (optional)
