@@ -23,10 +23,10 @@ const AddCourse = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const mutate =  useInsertNewMutation();
-    const AddNewCourse = mutate[0];
+  const AddNewCourse = mutate[0];
 
 
-  let handleSubmit = async () => {
+  const handleSubmit = async () => {
     const newCourse: TCourse = {
       subject,
       courseNumber,

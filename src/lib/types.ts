@@ -1,5 +1,7 @@
+import { UUID } from "crypto";
+
 export interface TCourse{
-    id?: number;
+    id?: UUID;
     subject: string;
     courseNumber: string;
     description: string;

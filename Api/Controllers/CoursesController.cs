@@ -101,6 +101,6 @@ public class CoursesController : ControllerBase
             return NotFound();
         _dbContext.Remove(course);
         _dbContext.SaveChanges();
-        return Ok($"Course {course.Subject} - {course.CourseNumber} deleted successfully");
+        return Ok();
     }
 }
