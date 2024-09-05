@@ -28,34 +28,35 @@ dotnet tool install --global dotnet-ef
 
 ## TL:DR Running on local 
 
-    First start the postgres db container 
+First start the postgres db container 
 
-    ```bash
-    docker pull postgres
+```bash
+docker pull postgres
 
-    docker run --name course-postgres-db -e POSTGRES_USER=dbUser -e POSTGRES_PASSWORD=dbpassword -e POSTGRES_DB=coursesdb -p 5432:5432 -d postgres
-    ```
+docker run --name course-postgres-db -e POSTGRES_USER=dbUser -e POSTGRES_PASSWORD=dbpassword -e POSTGRES_DB=coursesdb -p 5432:5432 -d postgres
+```
 
-    then using entity framework prepare our db
+then using entity framework prepare our db
 
-    ```bash
-    dotnet ef database update
-    ```
+```bash
+dotnet ef database update
+```
 
-    then start the API running
-    also API will create two example registers if the DB is empty.
+then start the API running
+also API will create two example registers if the DB is empty.
 
-    ```bash
-    dotnet run
-    ```
+```bash
+dotnet run
+```
 
-    finally run the frontend
+finally run the frontend
 
-    ```bash
-    pnpm install
-    pnpm run dev
-    ```
-    the app is served at [http://localhost:3000](http://localhost:3000)
+```bash
+pnpm install
+pnpm run dev
+```
+
+the app is served at [http://localhost:3000](http://localhost:3000)
 
 ## development instructions
 
