@@ -1,11 +1,11 @@
 # Fake course Manager
 
-A fake application to apply to a software developer position, the assigment timeframe is 2 days. 
+A fake application to apply to a software developer position, the assignment deadline is 2 days. 
 
 ![screnshot](./docs/image.png)
 
 ## Stack
- The application was built using the following thecnologies: 
+ The application was built using the following technologies: 
     Api is built in .net
     App is built using React/Nextjs
     DB using Postgres
@@ -18,7 +18,13 @@ also other complementary technologies used : Redux, MUI, sass, eslint, prettier.
 -npm / pnpm
 -dotnet > 8
 -docker desktop / docker cli
--dotnet entitiy framework
+-dotnet entity framework
+
+to install Dotnet Entity Framework 
+
+```bash
+dotnet tool install --global dotnet-ef
+```
 
 ## TL:DR Running on local 
 
@@ -30,13 +36,13 @@ also other complementary technologies used : Redux, MUI, sass, eslint, prettier.
     docker run --name course-postgres-db -e POSTGRES_USER=dbUser -e POSTGRES_PASSWORD=dbpassword -e POSTGRES_DB=coursesdb -p 5432:5432 -d postgres
     ```
 
-    then using entitiy framwework preparte our db
+    then using entity framework prepare our db
 
     ```bash
     dotnet ef database update
     ```
 
-    then start the API ruuning
+    then start the API running
     also API will create two example registers if the DB is empty.
 
     ```bash
@@ -93,7 +99,7 @@ then Run the dotnet API
     dotnet run
 ```
 
-Api will be available in (http:localhost:5020)[http:localhost:5020]
+Api will be available at (http:localhost:5020)[http:localhost:5020]
 
 also is posible see the Api documetnation : (http://localhost:5020/swagger/)[http://localhost:5020/swagger/]
 
