@@ -2,6 +2,8 @@
 
 A fake application to apply to a software developer position, the assigment timeframe is 2 days. 
 
+![screnshot](./docs/image.png)
+
 ## Stack
  The application was built using the following thecnologies: 
     Api is built in .net
@@ -138,8 +140,8 @@ Develop simple Web application, in any language of your choosing, which manages 
 - [x]The application should store data in an external database or another data storage system.
 
 Features:
-- The application should allow user to search for a course by description, with partial matches like "Bio" would find "Introduction to Biology"
-- The application should support deleting a Course
+- [x] The application should allow user to search for a course by description, with partial matches like "Bio" would find "Introduction to Biology"
+- [x] The application should support deleting a Course
 - [x] The application should support inserting a new Course
 - [x] courseNumber must be formatted as a three-digit, zero-padded integer like "033". 
 - [x] Adding records which are not three-digit numbers results in an validation message to the user

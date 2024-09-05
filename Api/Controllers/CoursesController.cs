@@ -33,9 +33,7 @@ public class CoursesController : ControllerBase
         if (!string.IsNullOrEmpty(query))
         {
             allCourses = _dbContext.Courses
-                .Where(c => c.Description.Contains(query) ||
-                            c.Subject.Contains(query))
-                .ToList();
+                .Where(c => c.Description.Contains(query)).ToList();
         }
         else
         {
