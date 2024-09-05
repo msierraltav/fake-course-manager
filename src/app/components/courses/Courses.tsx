@@ -24,6 +24,8 @@ const Courses = (props: Props) => {
     console.error(error);
   }
 
+  console.log(lastAdded);
+
   // positive feedback add a new elent to the UI inmediatly if was suceessfull added to the db
   useEffect(() => {
     if (lastAdded.length > 0) {
@@ -33,13 +35,12 @@ const Courses = (props: Props) => {
   }, [lastAdded]);
 
   useEffect(() => {
-    if (data && data?.length > 0) setCourseList(data);
+    if (data) setCourseList(data);
   }, [data]);
 
   useEffect(() => {
-    if(lastRemoved.length >0){
+    if(lastRemoved.length > 0){
       
-      // create a new list of courseList witout the elements from lastRemoved
       const newList = courseList.filter(course => {
         return !lastRemoved.includes(course)
       });

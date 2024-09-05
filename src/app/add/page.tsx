@@ -2,9 +2,9 @@
 import { Button, Container } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useInsertNewMutation } from "@/redux/services/coursesApi";
-import { useAppDispatch, useAppSelector } from '@/redux/useReduxHooks';
+import { useAppDispatch } from '@/redux/useReduxHooks';
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import { TCourse } from "@/lib/types";
@@ -43,10 +43,8 @@ const AddCourse = (props: Props) => {
         }else{
             setAlertMessage("Course Added");
             setOpen(true);
-            dispatch(setLastAdded(data))
+            dispatch(setLastAdded(data));
         }
-
-
     } catch (err) {
         setAlertMessage(`Error: ${err}`);
         setOpen(true);
