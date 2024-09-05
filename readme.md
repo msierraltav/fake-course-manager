@@ -46,6 +46,8 @@ then start the API running
 also API will create two example registers if the DB is empty.
 
 ```bash
+cd ./api
+
 dotnet run
 ```
 
