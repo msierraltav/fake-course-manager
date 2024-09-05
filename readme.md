@@ -7,15 +7,43 @@ A fake application to apply to a software developer position, the assigment time
 Api is built in .net
 App is built using Nextjs
 
-Other technoligies used : Redux, MUI, sass, eslint, prettier
+Other technologies used : Redux, MUI, sass, eslint, prettier.
 
-## Api init
+## requirements
 
-Simply run 
+-node
+-npm / pnpm
+-dotnet > 8
+-docker
 
-```
+## instructions
+
+### Run Api
+
+```bash
+    cd ./api
     dotnet run
 ```
+
+Api will be available in (http:localhost:5020)[http:localhost:5020]
+
+also is posible see the Api documetnation : (http://localhost:5020/swagger/)[http://localhost:5020/swagger/]
+
+### web app
+
+First, run the development server:
+
+```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    # or
+    bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Assestment instructions
 Develop simple Web application, in any language of your choosing, which manages "Course" records:

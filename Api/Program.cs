@@ -1,5 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// accept all origins, only as example for our fake course manager app.
+builder.Services.AddCors(options =>
+{
+   options.AddDefaultPolicy(builder =>{
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+   });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -17,6 +27,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

@@ -17,6 +17,7 @@ public class CoursesController : ControllerBase{
 
         if(_courseRecords == null || _courseRecords.Count == 0)
         {
+            _logger.LogInformation("Creating a new DB of courses");
             // lets add 2 default records
             CourseRecord introToBiology = new CourseRecord{
                 Id = 1,
@@ -37,10 +38,22 @@ public class CoursesController : ControllerBase{
         }
     }
 
-    [HttpGet(Name = "GetAllCourses")]
+    [HttpGet]
     [Route("[action]")]
-    public IEnumerable<CourseRecord> Get(){
-        return _courseRecords;
+    public IActionResult GetAll(){
+        return Ok(_courseRecords);
+    }
+
+    [HttpGet]
+    [Route("[action]")]
+    public IActionResult GetById(uint id){
+        var course = _courseRecords.FirstOrDefault(c => c.Id == id);
+        if(course == null){
+            _logger.LogInformation($"Course with Id ${id} was not found");
+            return NotFound();
+        }
+            
+        return Ok(course);
     }
 
     [HttpPost]
@@ -49,7 +62,7 @@ public class CoursesController : ControllerBase{
             return BadRequest("Not valid Course Record.");
 
         _courseRecords.Add(course);
-        // lets return the newly created record.
+        _logger.LogInformation("Returning all courses in the DB");
         return CreatedAtRoute("GetAllCourses", new {id = course.Id}, course);
     }
 
@@ -63,5 +76,4 @@ public class CoursesController : ControllerBase{
         _courseRecords.Remove(course);
         return Ok($"Course {id} deleted successfully");
     }
-
 }
