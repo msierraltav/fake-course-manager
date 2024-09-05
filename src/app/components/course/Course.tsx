@@ -12,9 +12,10 @@ import circleStudeny from "../../../../public/circle_studentsuccess.png";
 
 type Props = {
   course: TCourse;
+  isCourseDetail?: boolean;
 };
 
-const Course = ({ course }: Props) => {
+const Course = ({ course, isCourseDetail = false }: Props) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -32,9 +33,15 @@ const Course = ({ course }: Props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link href={`/course/${course.id}`} color="secondary" component={NextLink}>
-          <Button size="small">Details</Button>
-        </Link>
+        {!isCourseDetail && (
+          <Link
+            href={`/course/${course.id}`}
+            color="secondary"
+            component={NextLink}
+          >
+            <Button size="small">Details</Button>
+          </Link>
+        )}
       </CardActions>
     </Card>
   );

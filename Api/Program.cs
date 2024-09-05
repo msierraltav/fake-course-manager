@@ -1,3 +1,7 @@
+using Api.Data;
+using Api.Services.Courses;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // accept all origins, only as example for our fake course manager app.
@@ -17,6 +21,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<AppDbContext>(options =>  options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")));
+
+// builder.Services.AddScoped<ICoursesService, CoursesService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,5 +41,7 @@ app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.InitializeDb();
 
 app.Run();

@@ -4,7 +4,7 @@ import Course from "@/app/components/course/Course";
 import { useGetCourseByIdQuery } from "@/redux/services/coursesApi";
 import { TCourse } from "@/lib/types";
 import { useAppDispatch } from '@/redux/useReduxHooks';
-import { setSearchBar, setSubTitle } from "@/redux/features/headerSlice";
+import { setSubTitle } from "@/redux/features/headerSlice";
 
 type Props = {
   params: {
@@ -32,7 +32,7 @@ const CourseDetails = ({ params }: Props) => {
   console.log(course);
   return <div className="flex flex-col justify-center items-center">
     {isSuccess && (
-        <Course course={course} />
+        <Course course={course} isCourseDetail={true}/>
     )}
   </div>;
 };

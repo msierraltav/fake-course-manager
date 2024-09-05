@@ -1,3 +1,6 @@
+using Api.Data;
+using Api.Models;
+using Api.Services.Courses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -8,46 +11,30 @@ namespace Api.Controllers;
 public class CoursesController : ControllerBase{
 
     private readonly ILogger<CoursesController> _logger;
-    // lets create a example db of courses.
-    private static List<CourseRecord> _courseRecords = new List<CourseRecord>();
 
-    public CoursesController(ILogger<CoursesController> logger){
+    // private readonly ICoursesService _courseService;
+    private readonly AppDbContext _dbContext;
+
+    public CoursesController(AppDbContext dbContext,ILogger<CoursesController> logger){
 
         _logger = logger;
-
-        if(_courseRecords == null || _courseRecords.Count == 0)
-        {
-            _logger.LogInformation("Creating a new DB of courses");
-            // lets add 2 default records
-            CourseRecord introToBiology = new CourseRecord{
-                Id = 1,
-                Subject = "BIO",
-                CourseNumber = "101",
-                Description = "Introduction to Biology",
-            };
-
-            CourseRecord businessStatistics = new CourseRecord{
-                Id = 2,
-                Subject = "Mat",
-                CourseNumber = "045",
-                Description = "Business Statistics",
-            };
-
-            _courseRecords.Add(introToBiology);
-            _courseRecords.Add(businessStatistics);
-        }
+        // _courseService = courseService;
+        _dbContext = dbContext;
     }
 
+    //http://localhost:5020/api/Courses/GetAll
     [HttpGet]
     [Route("[action]")]
-    public IActionResult GetAll(){
-        return Ok(_courseRecords);
+    public  IActionResult GetAll(){
+        var allCourses =  _dbContext.Courses.ToList();
+        return Ok(allCourses);
     }
 
+    // http://localhost:5020/api/Courses/GetById?id=1
     [HttpGet]
     [Route("[action]")]
-    public IActionResult GetById(uint id){
-        var course = _courseRecords.FirstOrDefault(c => c.Id == id);
+    public IActionResult GetById(Guid id){
+        var course = _dbContext.Courses.Find(id);
         if(course == null){
             _logger.LogInformation($"Course with Id ${id} was not found");
             return NotFound();
@@ -56,24 +43,43 @@ public class CoursesController : ControllerBase{
         return Ok(course);
     }
 
+    // http://localhost:5020/api/Courses/AddCourseRecord
     [HttpPost]
-    public IActionResult Post(CourseRecord course){
+    [Route("[action]")]
+    public IActionResult AddCourseRecord(AddCourseDto course){
         if(!ModelState.IsValid)
             return BadRequest("Not valid Course Record.");
 
-        _courseRecords.Add(course);
-        _logger.LogInformation("Returning all courses in the DB");
-        return CreatedAtRoute("GetAllCourses", new {id = course.Id}, course);
+        if(string.IsNullOrEmpty(course.CourseNumber))
+            return BadRequest("Course Number must be 3 digits");
+
+        if(course.CourseNumber?.Length != 3 || !course.CourseNumber.All(char.IsNumber)){
+            return BadRequest("Not Valid Course Number");
+        }
+
+        var newCourse = new Course(){
+            CourseNumber = course.CourseNumber,
+            Subject = course.Subject,
+            Description = course.Description
+        };
+
+        _dbContext.Add(newCourse);
+        _dbContext.SaveChanges();
+        return CreatedAtAction("GetById", new {id = newCourse.Id}, newCourse);
+    }
+
+    [HttpPut]
+    public IActionResult UpdateCourse(){
+        throw new NotImplementedException();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(uint id){
+    public  IActionResult Delete(Guid id){
         // lets find the record we want to delete.
-        var course = _courseRecords.FirstOrDefault(c => c.Id == id);
+        var course = _dbContext.Courses.Find(id);
         if(course == null)
             return NotFound();
-
-        _courseRecords.Remove(course);
-        return Ok($"Course {id} deleted successfully");
+        var deleted = _dbContext.Remove(id);
+        return Ok($"Course {deleted} deleted successfully");
     }
 }

@@ -1,6 +1,6 @@
 namespace Api;
 
-public class Course{
+public class CourseRecord{
     public Guid Id { get; set; }
 
     public string? Subject { get; set; }

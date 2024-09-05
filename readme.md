@@ -6,22 +6,87 @@ A fake application to apply to a software developer position, the assigment time
 
 Api is built in .net
 App is built using Nextjs
+DB using Postgres
 
-Other technologies used : Redux, MUI, sass, eslint, prettier.
+Other technologies used : Redux, MUI, sass, eslint, prettier. entity framework 
 
 ## requirements
 
 -node
 -npm / pnpm
 -dotnet > 8
--docker
+-docker desktop / docker cli
+-dotnety entitiy framework
 
-## instructions
+## Running on local 
+
+    First Start the db container 
+
+    ```bash
+    docker pull postgres
+
+    docker run --name course-postgres-db -e POSTGRES_USER=dbUser -e POSTGRES_PASSWORD=dbpassword -e POSTGRES_DB=coursesdb -p 5432:5432 -d postgres
+    ```
+
+    then using entitiy framwework preparte our db
+
+    ```bash
+    dotnet ef database update
+    ```
+
+    then start the API ruuning
+    ```bash
+    dotnet run
+    ```
+    also the last command will create two example register
+
+    finally run the frontend
+
+    ```bash
+    pnpm install
+    pnpm run dev
+    ```
+
+
+## development instructions
+
+We need to run 3 components for our app 
+- Database
+- API
+- WebApp
+
+### Run DB
+
+First run de db with a docker container:
+
+```bash
+docker pull postgres
+
+docker run --name course-postgres-db -e POSTGRES_USER=dbUser -e POSTGRES_PASSWORD=dbpassword -e POSTGRES_DB=coursesdb -p 5432:5432 -d postgres
+```
+
+if you want to interact with the container simply run 
+
+```bash
+docker exec -it course-postgres-db bash
+
+psql -U dbUser --password --db coursesdb
+```
+
+To stop and delete the container  (warning: the db will be lost.)
+
+```bash
+docker stop course-postgres-db
+docker rm course-postgres-db
+```
 
 ### Run Api
 
+then Run the dotnet API
+
 ```bash
     cd ./api
+    dotnet restore
     dotnet run
 ```
 
@@ -29,9 +94,29 @@ Api will be available in (http:localhost:5020)[http:localhost:5020]
 
 also is posible see the Api documetnation : (http://localhost:5020/swagger/)[http://localhost:5020/swagger/]
 
+to init the database we need to use entity framework
+
+Install dotnet-ef tool in your machine
+
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+then init the db
+
+```bash
+dotnet ef migrations add InitialMigration
+dotnet ef database update
+```
+
+if you need to remove it simply run 
+```bash 
+dotnet ef migrations remove
+```
+
 ### web app
 
-First, run the development server:
+Finally, run the development server:
 
 ```bash
     npm run dev
@@ -47,14 +132,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Assestment instructions
 Develop simple Web application, in any language of your choosing, which manages "Course" records:
-- The application should manage the following information about a Course: id, subject, courseNumber, description. All fields other than id are strings
-- There should be a simple UI/UX to add/remove courses, search courses, and show list of current courses. This does not have to be fancy as we are not looking for a UI Designer.
+- [x]The application should manage the following information about a Course: id, subject, courseNumber, description. All fields other than id are strings
+- []There should be a simple UI/UX to add/remove courses, search courses, and show list of current courses. This does not have to be fancy as we are not looking for a UI Designer.
 - The application should store data in an external database or another data storage system.
 
 Features:
 - The application should allow user to search for a course by description, with partial matches like "Bio" would find "Introduction to Biology"
 - The application should support deleting a Course
-- The application should support inserting a new Course
+- [x]The application should support inserting a new Course
 - courseNumber must be formatted as a three-digit, zero-padded integer like "033". Adding records which are not three-digit numbers results in an validation message to the user
 - The application should prevent inserting duplicate courses, where subject and number must be unique
 

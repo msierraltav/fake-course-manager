@@ -1,6 +1,7 @@
-namespace Api;
+namespace Api.Models;
 
-public class Course{
+
+public class AddCourseDto{
     public Guid Id { get; set; }
 
     public string? Subject { get; set; }
