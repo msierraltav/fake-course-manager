@@ -5,10 +5,11 @@ import { useGetCourseByIdQuery } from "@/redux/services/coursesApi";
 import { TCourse } from "@/lib/types";
 import { useAppDispatch } from '@/redux/useReduxHooks';
 import { setSubTitle } from "@/redux/features/headerSlice";
+import { UUID } from "crypto";
 
 type Props = {
   params: {
-    courseId: number;
+    courseId: UUID;
   };
 };
 

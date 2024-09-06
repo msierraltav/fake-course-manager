@@ -81,7 +81,7 @@ const AddCourse = (props: Props) => {
 
   return (
     <Container className="flex flex-col h-full justify-left items-start gap-6">
-      <Box variant="h6" component="div" sx={{ flexGrow: 0 }}>
+      <Box component="div" sx={{ flexGrow: 0 }}>
         Add a new course
       </Box>
 
@@ -91,7 +91,7 @@ const AddCourse = (props: Props) => {
           id="outlined-required"
           label="Subject"
           placeholder="ING"
-          onChange={(e) => {
+          onChange={(e : any) => {
             setSubject(e.target.value);
           }}
         />
@@ -101,7 +101,7 @@ const AddCourse = (props: Props) => {
           label="Course Number"
           placeholder="007"
           autoSave="false"
-          onChange={(e) => {
+          onChange={(e: any) => {
             setCourseNumber(e.target.value);
           }}
         />
@@ -111,7 +111,7 @@ const AddCourse = (props: Props) => {
           placeholder="A super cool course"
           multiline
           maxRows={4}
-          onChange={(e) => {
+          onChange={(e: any) => {
             setDescription(e.target.value);
           }}
         />

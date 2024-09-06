@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
@@ -29,7 +30,9 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <Providers>
               <Container className="container 2xl">
-                <Header />
+                <Suspense>
+                  <Header />
+                </Suspense>
                 <div className={style.main}>
                   <Sidebar />
                   {children}
