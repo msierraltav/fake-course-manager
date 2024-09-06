@@ -36,6 +36,15 @@ to stop it simply run.
 docker-compose down
 ```
 
+### Troubleshooting
+
+If you previously ran the development environment on your local machine, you’ll encounter an error when executing docker compose up.
+
+```
+failed to solve: process "/bin/sh -c pnpm run build" did not complete successfully: exit code: 1
+```
+ To fix it, delete the ```node_modules``` folder and the ```.next``` folder.”
+
 ---
 
 ## Development requirements
@@ -196,3 +205,5 @@ Suggestions:
 
 TODO List: 
 [] Show a message when the Api is not available
+[] Testing in backend and frontend.
+
