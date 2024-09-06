@@ -1,16 +1,20 @@
 # Fake course Manager
 
-A fake application to apply to a software developer position, the assignment deadline is 2 days. 
+Welcome to the “Fake Course Manager” application! This project was created as part of an assignment for a software developer position.
+
+The application is responsible for displaying, creating, and deleting courses from a fictional Institution. It is connected to an API that verifies and executes the instructions requested by the frontend. Additionally, it is linked to a relational database.
 
 ![screnshot](./docs/image.png)
 
 ## Stack
- The application was built using the following technologies: 
-    Api is built in .net
-    App is built using React/Nextjs
-    DB using Postgres
 
-also other complementary technologies used : Redux, MUI, sass, eslint, prettier. entity framework, postgres.
+ The application was built using the following technologies: 
+
+- API: Built using .NET and Entity Framework
+- App: Developed with React and Next.js
+- Database: Powered by PostgreSQL
+    
+In addition to these core technologies, we’ve also utilized complementary tools and libraries, including Redux, Material-UI (MUI), Sass, ESLint, Prettier and Docker for managing containers.
 
 ## Run App in production using docker compose
 
@@ -34,21 +38,23 @@ docker-compose down
 
 ---
 
-## development requirements
+## Development requirements
 
--node
--npm / pnpm
--dotnet > 8
--docker desktop / docker cli
--dotnet entity framework
+Ensure you have the following tools installed:
 
-to install Dotnet Entity Framework 
+Node.js
+npm or pnpm
+.NET SDK (version 8 or higher)
+Docker Desktop or Docker CLI
+.NET Entity Framework (for database migrations)
+
+To install the .NET Entity Framework, use the following command:
 
 ```bash
 dotnet tool install --global dotnet-ef
 ```
 
-## TL:DR Run development on local 
+## TL;DR: Running Locally for Development 
 
 First start the postgres db container 
 
@@ -57,9 +63,8 @@ docker pull postgres
 
 docker run --name course-postgres-db -e POSTGRES_USER=dbUser -e POSTGRES_PASSWORD=dbpassword -e POSTGRES_DB=coursesdb -p 5432:5432 -d postgres
 ```
-
-
 then start the API running
+
 also API will create two example registers if the DB is empty.
 
 ```bash
@@ -75,17 +80,18 @@ pnpm install
 pnpm run dev
 ```
 
-the app is served at [http://localhost:3000](http://localhost:3000)
+Access the app at [http://localhost:3000](http://localhost:3000)
 
 
-## development instructions
+## Development instructions
 
-We need to run 3 components for our app 
-- Database
-- API
-- WebApp
+Our app consists of three components:
 
-### Run DB
+- Database: Set up the PostgreSQL container.
+- API: Run the .NET API
+- Web App: Start the development server for the Next.js app.
+
+### Set up and Run DB
 
 First run de db with a docker container:
 
