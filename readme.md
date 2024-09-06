@@ -14,6 +14,9 @@ also other complementary technologies used : Redux, MUI, sass, eslint, prettier.
 
 ## Run App in production using docker compose
 
+Using Docker Compose, we can spin up 3 containers: one for the .NET API, another for the PostgreSQL database, and yet another for the Next.js application. 
+This way, we can easily set up a production environment to view and test our app
+
 - require docker desktop
 
 To run the app using docker compose simply run :
@@ -29,7 +32,7 @@ to stop it simply run.
 docker-compose down
 ```
 
-
+---
 
 ## development requirements
 
