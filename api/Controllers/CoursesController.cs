@@ -33,7 +33,7 @@ public class CoursesController : ControllerBase
         if (!string.IsNullOrEmpty(query))
         {
             allCourses = _dbContext.Courses
-                .Where(c => c.Description.Contains(query)).ToList();
+                .Where(c => c.Description.ToLower().Contains(query)).ToList();
         }
         else
         {
@@ -93,13 +93,6 @@ public class CoursesController : ControllerBase
         _dbContext.Add(newCourse);
         _dbContext.SaveChanges();
         return CreatedAtAction("GetById", new { id = newCourse.Id }, newCourse);
-    }
-
-    [HttpPut]
-    [Route("{id:guid}")]
-    public IActionResult UpdateCourse()
-    {
-        throw new NotImplementedException();
     }
 
     //http://localhost:5020/api/Courses/{id}
