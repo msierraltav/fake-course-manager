@@ -21,7 +21,7 @@ const Courses = (props: Props) => {
 
   const dispatch = useAppDispatch();
   const searchQuery = useAppSelector((state) => state.headerReducer.searchBar);
-  const { data, error, isSuccess, isLoading } = useGetAllCoursesQuery({
+  const { data, error, isSuccess, isLoading , refetch} = useGetAllCoursesQuery({
     q: searchQuery,
   });
 
@@ -30,7 +30,9 @@ const Courses = (props: Props) => {
   }, []);
 
   useEffect(() => {
+
     if (data && isSuccess) {
+      refetch();
       dispatch(clearCourses());
       dispatch(addCourses(data));
     }

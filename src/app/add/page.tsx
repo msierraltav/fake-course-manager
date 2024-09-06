@@ -34,7 +34,7 @@ const AddCourse = (props: Props) => {
     try {
       const { error, data } = await AddNewCourse(newCourse);
       if (error) {
-        setAlertMessage(`Error: ${error.data}`);
+        setAlertMessage(`Error: ${error.data!}`);
         setOpen(true);
       } else {
         setAlertMessage("Course Added");

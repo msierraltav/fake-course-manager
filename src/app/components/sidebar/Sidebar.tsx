@@ -18,7 +18,7 @@ const Sidebar = (props: Props) => {
       <nav aria-label="Course Manager Pages">
         <List>
           <ListItem disablePadding>
-            <Link href="/" color="secondary" component={NextLink} shallow={false}>
+            <Link href="/" color="secondary" component={NextLink}>
               <ListItemButton>
                 <ListItemIcon>
                   <SchoolIcon />

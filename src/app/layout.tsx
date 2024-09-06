@@ -28,13 +28,14 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <Providers>
-            <Container className="container 2xl">
-      <Header/>
-      <div className={style.main}>
-        <Sidebar/>{children}
-      </div>
-    </Container>
-              </Providers>
+              <Container className="container 2xl">
+                <Header />
+                <div className={style.main}>
+                  <Sidebar />
+                  {children}
+                </div>
+              </Container>
+            </Providers>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
