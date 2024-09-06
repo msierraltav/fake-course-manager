@@ -1,58 +1,48 @@
 "use client";
 import { TCourse } from "@/lib/types";
 import React, { useEffect, useState } from "react";
-import { useGetAllCoursesQuery } from "@/redux/services/coursesApi";
-import { useAppDispatch, useAppSelector } from "@/redux/useReduxHooks";
 import Course from "@/app/components/course/Course";
 import NoData from "@/app/components/noData/NoData";
+
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+
 import { Container } from "@mui/material";
-import { clearLastAdded, clearRemoved } from "@/redux/features/headerSlice";
+
+import { useAppDispatch, useAppSelector } from "@/redux/useReduxHooks";
+import { useGetAllCoursesQuery } from "@/redux/services/coursesApi";
+import { addCourses, clearCourses } from "@/redux/features/courseSlice";
 
 type Props = {};
 
 const Courses = (props: Props) => {
-  const lastAdded = useAppSelector((state) => state.headerReducer.lastAdded);
-  const lastRemoved = useAppSelector((state) => state.headerReducer.lastRemoved);
-  const searchQuery = useAppSelector((state) => state.headerReducer.searchBar);
-  const dispatch = useAppDispatch();
-  const { data, error, isSuccess, isLoading } = useGetAllCoursesQuery({q: searchQuery});
-  const [courseList, setCourseList] = useState<TCourse[]>(data || []);
+  const [isClient, setIsClient] = useState(false);
+  const courseList = useAppSelector((state) => state.coursesReducer.courseList);
 
-  if (error) {
+  const dispatch = useAppDispatch();
+  const searchQuery = useAppSelector((state) => state.headerReducer.searchBar);
+  const { data, error, isSuccess, isLoading } = useGetAllCoursesQuery({
+    q: searchQuery,
+  });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (data && isSuccess) {
+      dispatch(clearCourses());
+      dispatch(addCourses(data));
+    }
+  }, [isSuccess, data, dispatch, isClient]);
+
+  if(error){
     console.error(error);
   }
 
-  console.log(lastAdded);
-
-  // positive feedback add a new elent to the UI inmediatly if was suceessfull added to the db
-  useEffect(() => {
-    if (lastAdded.length > 0) {
-      setCourseList([...courseList, ...lastAdded]);
-      dispatch(clearLastAdded());
-    }
-  }, [lastAdded]);
-
-  useEffect(() => {
-    if (data) setCourseList(data);
-  }, [data]);
-
-  useEffect(() => {
-    if(lastRemoved.length > 0){
-      
-      const newList = courseList.filter(course => {
-        return !lastRemoved.includes(course)
-      });
-      setCourseList([...newList]);
-      dispatch(clearRemoved());
-    }
-    
-  }, [lastRemoved]);
-
   return (
     <Container className="sd:grid-cols-1 mb-3 grid auto-cols-auto gap-3 md:grid-cols-3 xl:grid-cols-3">
-      {isSuccess && courseList.length > 0 ? (
+      {isSuccess && courseList && courseList.length > 0 ? (
         <>
           {courseList.map((course) => (
             <Course key={course.id} course={course} />

@@ -4,7 +4,6 @@ import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -83,7 +82,6 @@ export default function Header() {
     dispatch(setSearchBar(term));
   };
 
-  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -100,9 +98,9 @@ export default function Header() {
             <MenuBookIcon />
           </IconButton>
           </Link>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Box sx={{ flexGrow: 1 }}>
             {subTitle? subTitle : "Course Manager"}
-          </Typography>
+          </Box>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

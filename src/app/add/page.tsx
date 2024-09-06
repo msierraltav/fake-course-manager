@@ -1,15 +1,15 @@
-"use client";
+"use client"
 import { Button, Container } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import React, { useState } from "react";
 import { useInsertNewMutation } from "@/redux/services/coursesApi";
-import { useAppDispatch } from '@/redux/useReduxHooks';
+import { useAppDispatch } from "@/redux/useReduxHooks";
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import { TCourse } from "@/lib/types";
 import CloseIcon from "@mui/icons-material/Close";
-import { setLastAdded } from "@/redux/features/headerSlice";
+import { addCourses } from "@/redux/features/courseSlice";
 
 type Props = {};
 
@@ -18,13 +18,11 @@ const AddCourse = (props: Props) => {
   const [courseNumber, setCourseNumber] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [open, setOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<string>("Hello");
+  const [alertMessage, setAlertMessage] = useState<string>("");
 
   const dispatch = useAppDispatch();
-
-  const mutate =  useInsertNewMutation();
+  const mutate = useInsertNewMutation();
   const AddNewCourse = mutate[0];
-
 
   const handleSubmit = async () => {
     const newCourse: TCourse = {
@@ -34,20 +32,18 @@ const AddCourse = (props: Props) => {
     };
 
     try {
-
-        const {error, data} = await AddNewCourse(newCourse);
-
-        if(error){
-            setAlertMessage(`Error: ${error.data!}`);
-            setOpen(true);
-        }else{
-            setAlertMessage("Course Added");
-            setOpen(true);
-            dispatch(setLastAdded(data));
-        }
-    } catch (err) {
-        setAlertMessage(`Error: ${err}`);
+      const { error, data } = await AddNewCourse(newCourse);
+      if (error) {
+        setAlertMessage(`Error: ${error.data}`);
         setOpen(true);
+      } else {
+        setAlertMessage("Course Added");
+        setOpen(true);
+        dispatch(addCourses([data]));
+      }
+    } catch (err) {
+      setAlertMessage(`Error: ${err}`);
+      setOpen(true);
     }
   };
 
@@ -77,9 +73,9 @@ const AddCourse = (props: Props) => {
 
   return (
     <Container className="flex flex-col h-full justify-left items-start gap-6">
-      <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
+      <Box variant="h6" component="div" sx={{ flexGrow: 0 }}>
         Add a new course
-      </Typography>
+      </Box>
 
       <div className="flex flex-col gap-4">
         <TextField
@@ -123,7 +119,7 @@ const AddCourse = (props: Props) => {
         </Button>
       </div>
       <Snackbar
-        anchorOrigin={{vertical: "top", horizontal: "center"}}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
