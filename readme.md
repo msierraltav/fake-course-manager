@@ -26,6 +26,14 @@ to install Dotnet Entity Framework
 dotnet tool install --global dotnet-ef
 ```
 
+## TL:DR docker compose
+
+```
+docker-compose up --build
+docker-compose down
+
+```
+
 ## TL:DR Running on local 
 
 First start the postgres db container 
