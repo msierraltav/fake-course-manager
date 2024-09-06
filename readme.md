@@ -26,7 +26,6 @@ to install Dotnet Entity Framework
 dotnet tool install --global dotnet-ef
 ```
 
-
 ## TL:DR Running on local 
 
 First start the postgres db container 
@@ -52,7 +51,7 @@ cd ./api
 dotnet run
 ```
 
-finally run the frontend
+finally run the frontend, to do this open a new terminal in the root directory of the project and run : 
 
 ```bash
 pnpm install
@@ -170,3 +169,12 @@ Suggestions:
 - [x] Use an API to manage data and connect to the API from a front-end, Javascript application
 - Show that tests have been used to validate behavior
 - Runnable via Docker or Kubernetes (optional)
+
+Current Issues:
+
+[] on the first run the app in not populated until the page is refreshed in the browser. after refreshed all works as expected across different browsers, it seems that nextjs is not calling the redux tool to the api in te first run.
+
+TODO List: 
+[] Fix First load issue.
+[] Show a message when the Api is not available
+[] Docker compose file
