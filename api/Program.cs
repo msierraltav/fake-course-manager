@@ -3,14 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// accept all origins, only as example for our fake course manager app.
+// accept origin from localhost.
+// for production, you should use a real domain name here.
 builder.Services.AddCors(options =>
 {
-   options.AddDefaultPolicy(builder =>{
-    builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader();
-   });
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
 });
 
 // Add services to the container.
@@ -20,9 +22,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(options =>  options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")));
+// get connection string from env variable ( for docker ) or from config in dev mode.
+var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")?? builder.Configuration.GetConnectionString("WebApiDatabase");
 
-// builder.Services.AddScoped<ICoursesService, CoursesService>();
+builder.Services.AddDbContext<AppDbContext>(options =>  options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 

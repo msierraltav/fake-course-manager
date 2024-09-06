@@ -33,7 +33,7 @@ const Courses = (props: Props) => {
       dispatch(clearCourses());
       dispatch(addCourses(data));
     }
-  }, [isSuccess, data, dispatch, isClient]);
+  }, [isSuccess, data, dispatch, isClient, refetch]);
 
   if(error){
     console.error(error);

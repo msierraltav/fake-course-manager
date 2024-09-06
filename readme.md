@@ -12,7 +12,26 @@ A fake application to apply to a software developer position, the assignment dea
 
 also other complementary technologies used : Redux, MUI, sass, eslint, prettier. entity framework, postgres.
 
-## requirements
+## Run App in production using docker compose
+
+- require docker desktop
+
+To run the app using docker compose simply run :
+
+```
+docker-compose up --build
+```
+The app will be deployed and available [http://localhost:3000](http://localhost:3000)
+
+
+to stop it simply run.
+```
+docker-compose down
+```
+
+
+
+## development requirements
 
 -node
 -npm / pnpm
@@ -26,7 +45,7 @@ to install Dotnet Entity Framework
 dotnet tool install --global dotnet-ef
 ```
 
-## TL:DR Running on local 
+## TL:DR Run development on local 
 
 First start the postgres db container 
 
@@ -59,6 +78,7 @@ pnpm run dev
 ```
 
 the app is served at [http://localhost:3000](http://localhost:3000)
+
 
 ## development instructions
 
@@ -168,13 +188,7 @@ Example Course records:
 Suggestions:
 - [x] Use an API to manage data and connect to the API from a front-end, Javascript application
 - Show that tests have been used to validate behavior
-- Runnable via Docker or Kubernetes (optional)
-
-Current Issues:
-
-[] on the first run the app in not populated until the page is refreshed in the browser. after refreshed all works as expected across different browsers, it seems that nextjs is not calling the redux tool to the api in te first run.
+- [x] Runnable via Docker or Kubernetes (optional)
 
 TODO List: 
-[] Fix First load issue.
 [] Show a message when the Api is not available
-[] Docker compose file
