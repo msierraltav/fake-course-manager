@@ -55,11 +55,6 @@ docker pull postgres
 docker run --name course-postgres-db -e POSTGRES_USER=dbUser -e POSTGRES_PASSWORD=dbpassword -e POSTGRES_DB=coursesdb -p 5432:5432 -d postgres
 ```
 
-then using entity framework prepare our db
-
-```bash
-dotnet ef database update
-```
 
 then start the API running
 also API will create two example registers if the DB is empty.
