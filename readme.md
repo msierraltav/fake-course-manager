@@ -4,7 +4,7 @@ Welcome to the “Fake Course Manager” application! This project was created a
 
 The application is responsible for displaying, creating, and deleting courses from a fictional Institution, also use Optimistic updates to improve the user experience. It is connected to an API that verifies and executes the instructions requested by the frontend. Additionally, it is linked to a relational database.
 
-![screnshot](./docs/image.png)
+![screenshot](./docs/image.png)
 
 ## Stack
 
