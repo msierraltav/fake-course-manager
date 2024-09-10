@@ -21,7 +21,7 @@ export const  coursesApi = createApi({
         }),
         deleteCourse : builder.mutation<void, Partial<{id: UUID}>>({
             query: ({id}) => ({
-                url: `http://localhost:5020/api/Courses/${id}`,
+                url: `/Courses/${id}`,
                 method: 'DELETE'
             })
         })
